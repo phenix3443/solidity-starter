@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm test
-npm run format:sol
+run_when_file_changed() {
+    if (git diff --cached --name-only | grep --quiet "$1"); then
+        $2
+    fi
+}
+
+format_solidity() {
+    npm test &&
+        npm run format:sol
+}
+
+run_when_file_changed "*.sol" format_solidity
