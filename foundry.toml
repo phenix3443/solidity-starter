@@ -1,0 +1,15 @@
+# See more config options https://book.getfoundry.sh/config/
+[profile.default]
+# project
+src = 'src'
+out = 'out'
+libs = ["node_modules", "lib"]
+
+# solc
+solc_version = '0.8.20'
+
+# fmt
+[fmt]
+multiline_func_header = 'all'
+number_underscore = 'thousands'
+wrap_comments = true

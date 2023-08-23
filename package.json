@@ -1,0 +1,37 @@
+{
+  "name": "contract_starter",
+  "version": "1.0.0",
+  "description": "contract template repository developed by solidity",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "forge build",
+    "test": "forge test",
+    "lint:sol": "npx solhint src/**/*.sol script/**/*.sol test/**/*.sol",
+    "format:sol": "prettier --write src/**/*.sol script/**/*.sol test/**/*.sol"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phenix3443/contract_starter.git"
+  },
+  "keywords": [
+    "solidity",
+    "foundry",
+    "smart-contract",
+    "ethereum"
+  ],
+  "author": "phenix3443@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phenix3443/contract_starter/issues"
+  },
+  "homepage": "https://github.com/phenix3443/contract_starter#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "husky": "^8.0.0",
+    "prettier": "^3.0.2",
+    "prettier-plugin-solidity": "^1.1.3",
+    "solhint": "^3.6.2"
+  }
+}

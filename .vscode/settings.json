@@ -1,0 +1,8 @@
+{
+    "cSpell.words": [
+        "commitlint",
+        "mixedcase",
+        "solhint"
+    ],
+    "solidity.compileUsingRemoteVersion": "v0.8.21+commit.d9974bed"
+}
