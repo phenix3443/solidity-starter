@@ -1,6 +1,9 @@
 name: test
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [main]
+  pull_request:
 
 env:
   FOUNDRY_PROFILE: ci
@@ -23,12 +26,12 @@ jobs:
           version: nightly
 
       - name: Run Forge build
+        id: build
         run: |
           forge --version
           forge build --sizes
-        id: build
 
       - name: Run Forge tests
+        id: test
         run: |
           forge test -vvv
-        id: test
