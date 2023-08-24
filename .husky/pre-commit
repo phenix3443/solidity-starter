@@ -9,6 +9,7 @@ run_when_file_changed() {
 
 format_solidity() {
     pnpm test &&
+        pnpm lint:sol &&
         pnpm format:sol
 }
 

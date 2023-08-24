@@ -7,10 +7,11 @@ import {CounterV2} from "../../src/uups/CounterV2.sol";
 import {DeployProxy} from "./DeployProxy.s.sol";
 
 contract DeployCounterV2 is DeployProxy {
-    uint256 private _privateKey = vm.envUint("PRIVATE_KEY");
-    address private _proxyAddress = vm.envAddress("COUNTER_PROXY");
+    constructor() {
+        privateKey = vm.envUint("PRIVATE_KEY");
+    }
 
-    function run() external upgrade(_privateKey, _proxyAddress) {
+    function _run() internal override upgrade(vm.envAddress("PROXY")) {
         CounterV2 c = new CounterV2();
         implementation = address(c);
         data = bytes.concat(c.upgradeVersion.selector);

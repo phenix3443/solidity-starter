@@ -25,6 +25,9 @@ jobs:
         with:
           version: nightly
 
+      - name: Install pnpm dependencies
+        uses: ./.github/actions/install-pnpm-dependencies
+
       - name: Run Forge build
         id: build
         run: |
