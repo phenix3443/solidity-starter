@@ -1,5 +1,10 @@
 {
-  "remappings": ["ds-test/=lib/ds-test/src/", "forge-std/=lib/forge-std/src/"],
+  "remappings": [
+    "ds-test/=lib/ds-test/src/",
+    "forge-std/=lib/forge-std/src/",
+    "@openzeppelin/contracts=node_modules/@openzeppelin/contracts",
+    "@openzeppelin/contracts-upgradeable=node_modules/@openzeppelin/contracts-upgradeable"
+  ],
   "optimizer": {
     "enabled": true,
     "runs": 200
