@@ -8,7 +8,8 @@
     "build": "forge build",
     "test": "forge test",
     "lint:sol": "solhint src/**/*.sol script/**/*.sol test/**/*.sol",
-    "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol"
+    "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol",
+    "install:slither": "pip3 install slither-analyzer"
   },
   "repository": {
     "type": "git",

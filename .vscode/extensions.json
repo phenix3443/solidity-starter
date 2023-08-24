@@ -5,6 +5,7 @@
     "tintinweb.solidity-visual-auditor",
     "foxundermoon.shell-format",
     "timonwong.shellcheck",
-    "remisa.shellman"
+    "remisa.shellman",
+    "trailofbits.slither-vscode"
   ]
 }
