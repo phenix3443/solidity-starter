@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "build": "forge build",
     "test": "forge test",
-    "lint:sol": "npx solhint src/**/*.sol script/**/*.sol test/**/*.sol",
+    "lint:sol": "pnpm solhint src/**/*.sol script/**/*.sol test/**/*.sol",
     "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol"
   },
   "repository": {
