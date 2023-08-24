@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.21;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol"; // solhint-disable-line
 import {CounterV1} from "../../src/transparent/CounterV1.sol";
