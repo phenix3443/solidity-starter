@@ -8,8 +8,8 @@ run_when_file_changed() {
 }
 
 format_solidity() {
-    npm test &&
-        npm run format:sol
+    pnpm test &&
+        pnpm format:sol
 }
 
 run_when_file_changed "*.sol" format_solidity
