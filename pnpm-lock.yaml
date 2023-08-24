@@ -20,8 +20,8 @@ devDependencies:
     specifier: ^17.7.0
     version: 17.7.0
   husky:
-    specifier: ^8.0.0
-    version: 8.0.0
+    specifier: ^8.0.3
+    version: 8.0.3
   prettier:
     specifier: ^3.0.2
     version: 3.0.2
@@ -31,9 +31,6 @@ devDependencies:
   solhint:
     specifier: ^3.6.2
     version: 3.6.2
-  solhint-plugin-prettier:
-    specifier: ^0.0.5
-    version: 0.0.5(prettier-plugin-solidity@1.1.3)(prettier@3.0.2)
 
 packages:
 
@@ -726,8 +723,8 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /husky@8.0.0:
-    resolution: {integrity: sha512-4qbE/5dzNDNxFEkX9MNRPKl5+omTXQzdILCUWiqG/lWIAioiM5vln265/l6I2Zx8gpW8l1ukZwGQeCFbBZ6+6w==}
+  /husky@8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -1098,13 +1095,6 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /prettier-linter-helpers@1.0.0:
-    resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
-    engines: {node: '>=6.0.0'}
-    dependencies:
-      fast-diff: 1.3.0
-    dev: true
-
   /prettier-plugin-solidity@1.1.3(prettier@3.0.2):
     resolution: {integrity: sha512-fQ9yucPi2sBbA2U2Xjh6m4isUTJ7S7QLc/XDDsktqqxYfTwdYKJ0EnnywXHwCGAaYbQNK+HIYPL1OemxuMsgeg==}
     engines: {node: '>=12'}
@@ -1253,17 +1243,6 @@ packages:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
-    dev: true
-
-  /solhint-plugin-prettier@0.0.5(prettier-plugin-solidity@1.1.3)(prettier@3.0.2):
-    resolution: {integrity: sha512-7jmWcnVshIrO2FFinIvDQmhQpfpS2rRRn3RejiYgnjIE68xO2bvrYvjqVNfrio4xH9ghOqn83tKuTzLjEbmGIA==}
-    peerDependencies:
-      prettier: ^1.15.0 || ^2.0.0
-      prettier-plugin-solidity: ^1.0.0-alpha.14
-    dependencies:
-      prettier: 3.0.2
-      prettier-linter-helpers: 1.0.0
-      prettier-plugin-solidity: 1.1.3(prettier@3.0.2)
     dev: true
 
   /solhint@3.6.2:
