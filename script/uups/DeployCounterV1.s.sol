@@ -4,9 +4,9 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol"; // solhint-disable
 import {CounterV1} from "../../src/uups/CounterV1.sol";
-import {DeployProxy} from "./DeployProxy.s.sol";
+import {DeployScript} from "./DeployScript.s.sol";
 
-contract DeplpyCounterV1 is DeployProxy {
+contract DeplpyCounterV1 is DeployScript {
     constructor() {
         privateKey = vm.envUint("PRIVATE_KEY");
     }

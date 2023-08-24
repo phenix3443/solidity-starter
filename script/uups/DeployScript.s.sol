@@ -6,29 +6,29 @@ import "forge-std/Script.sol"; // solhint-disable
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
-abstract contract DeployProxy is Script {
+abstract contract DeployScript is Script {
     uint256 public privateKey;
-    address implementation;
-    bytes data;
+    address public implementation;
+    bytes public data;
+    address public proxyAddress;
 
-    error InvalidProxyAddress(string reason);
-    error InvalidImplAddress(string reason);
+    error InvalidAddress(string reason);
 
     modifier deploy() {
         _;
         if (implementation == address(0)) {
-            revert InvalidImplAddress("must not zero");
+            revert InvalidAddress("implementation address can not be zero");
         }
-        new ERC1967Proxy(implementation, data);
+        proxyAddress = address(new ERC1967Proxy(implementation, data));
     }
 
-    modifier upgrade(address proxyAddress) {
+    modifier upgrade() {
         if (proxyAddress == address(0)) {
-            revert InvalidProxyAddress("must not zero");
+            revert InvalidAddress("proxy address can not be zero");
         }
         _;
         if (implementation == address(0)) {
-            revert InvalidImplAddress("must not zero");
+            revert InvalidAddress("implementation address can not be zero");
         }
         UUPSUpgradeable proxy = UUPSUpgradeable(proxyAddress);
         proxy.upgradeToAndCall(address(implementation), data);

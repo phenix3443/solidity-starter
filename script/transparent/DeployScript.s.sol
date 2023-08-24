@@ -6,10 +6,11 @@ import "forge-std/Script.sol"; // solhint-disable-line
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
-abstract contract DeployProxy is Script {
+abstract contract DeployScript is Script {
     uint256 public privateKey;
     address public implementation;
     bytes public data;
+    address public proxyAddress;
 
     error InvalidAddress(string reason);
 
@@ -21,10 +22,12 @@ abstract contract DeployProxy is Script {
         if (implementation == address(0)) {
             revert InvalidAddress("implementation address can not be zero");
         }
-        new TransparentUpgradeableProxy(implementation, deployer, data);
+        proxyAddress = address(
+            new TransparentUpgradeableProxy(implementation, deployer, data)
+        );
     }
 
-    modifier upgrade(address proxyAddress) {
+    modifier upgrade() {
         if (proxyAddress == address(0)) {
             revert InvalidAddress("proxy address can not be zero");
         }
