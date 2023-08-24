@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["commitlint", "mixedcase", "solhint"],
+  "cSpell.words": ["commitlint", "mixedcase", "remappings", "solhint"],
   "solidity.compileUsingRemoteVersion": "v0.8.21+commit.d9974bed",
   "[solidity]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
