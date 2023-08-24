@@ -7,10 +7,10 @@ run_when_file_changed() {
     fi
 }
 
-format_solidity() {
+check_solidity() {
     pnpm test &&
         pnpm lint:sol &&
         pnpm format:sol
 }
 
-run_when_file_changed "*.sol" format_solidity
+run_when_file_changed ".sol" check_solidity

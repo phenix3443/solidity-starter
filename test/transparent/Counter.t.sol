@@ -4,6 +4,7 @@ pragma solidity ^0.8.20;
 import "forge-std/Test.sol"; // solhint-disable-line
 import {CounterV1} from "../../src/transparent/CounterV1.sol";
 import {CounterV2} from "../../src/transparent/CounterV2.sol";
+// solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
 contract CounterTest is Test {
