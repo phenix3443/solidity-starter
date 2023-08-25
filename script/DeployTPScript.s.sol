@@ -14,7 +14,7 @@ abstract contract DeployTPScript is Script {
 
     error InvalidAddress(string reason);
 
-    modifier deploy(address deployer) {
+    modifier create(address deployer) {
         _;
         if (deployer == address(0)) {
             revert InvalidAddress("deployer address can not be zero");
