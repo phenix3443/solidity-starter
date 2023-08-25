@@ -6,8 +6,8 @@ import "forge-std/Script.sol"; // solhint-disable
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
-abstract contract DeployScript is Script {
-    uint256 public privateKey;
+abstract contract DeployUUPSScript is Script {
+    uint256 public immutable PRIVATE_KEY;
     address public implementation;
     bytes public data;
     address public proxyAddress;
@@ -34,8 +34,12 @@ abstract contract DeployScript is Script {
         proxy.upgradeToAndCall(address(implementation), data);
     }
 
+    constructor(uint256 pkey) {
+        PRIVATE_KEY = pkey;
+    }
+
     function run() external {
-        vm.startBroadcast(privateKey);
+        vm.startBroadcast(PRIVATE_KEY);
         _run();
         vm.stopBroadcast();
     }

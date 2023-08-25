@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.18;
 
-import {CounterV1} from "./CounterV1.sol";
+import {TPCounterV1} from "./TPCounterV1.sol";
 
-contract CounterV2 is CounterV1 {
+contract TPCounterV2 is TPCounterV1 {
     function upgradeVersion() public {
         version = "v2";
     }

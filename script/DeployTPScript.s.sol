@@ -6,8 +6,8 @@ import "forge-std/Script.sol"; // solhint-disable-line
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
-abstract contract DeployScript is Script {
-    uint256 public privateKey;
+abstract contract DeployTPScript is Script {
+    uint256 public immutable PRIVATE_KEY;
     address public implementation;
     bytes public data;
     address public proxyAddress;
@@ -41,8 +41,12 @@ abstract contract DeployScript is Script {
         proxy.upgradeToAndCall(implementation, data);
     }
 
+    constructor(uint256 pkey) {
+        PRIVATE_KEY = pkey;
+    }
+
     function run() external {
-        vm.startBroadcast(privateKey);
+        vm.startBroadcast(PRIVATE_KEY);
         _run();
         vm.stopBroadcast();
     }

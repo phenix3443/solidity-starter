@@ -3,7 +3,7 @@ pragma solidity ^0.8.18;
 
 import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-contract CounterV1 is Initializable {
+contract TPCounterV1 is Initializable {
     string public version;
     uint256 public number;
 

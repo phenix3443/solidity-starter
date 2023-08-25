@@ -3,17 +3,16 @@
 pragma solidity ^0.8.18;
 
 import "forge-std/Script.sol"; // solhint-disable-line
-import {CounterV2} from "../../src/uups/CounterV2.sol";
-import {DeployScript} from "./DeployScript.s.sol";
+import {UUPSCounterV2} from "../src/UUPSCounterV2.sol";
+import {DeployUUPSScript} from "./DeployUUPSScript.s.sol";
 
-contract DeployCounterV2 is DeployScript {
-    constructor() {
-        privateKey = vm.envUint("PRIVATE_KEY");
+contract DeployUUPSCounterV2 is DeployUUPSScript {
+    constructor() DeployUUPSScript(vm.envUint("PRIVATE_KEY")) {
         proxyAddress = vm.envAddress("PROXY");
     }
 
     function _run() internal override upgrade {
-        CounterV2 c = new CounterV2();
+        UUPSCounterV2 c = new UUPSCounterV2();
         implementation = address(c);
         data = bytes.concat(c.upgradeVersion.selector);
     }
