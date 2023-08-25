@@ -13,6 +13,7 @@ contract DeployTPCounterV1 is DeployTPScript {
         _deployer = vm.envAddress("DEPLOYER");
     }
 
+    //slither-disable-next-line reentrancy-no-eth
     function _run() internal override deploy(_deployer) {
         TPCounterV1 c = new TPCounterV1();
         implementation = address(c);

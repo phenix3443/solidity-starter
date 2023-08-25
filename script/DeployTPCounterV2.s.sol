@@ -12,6 +12,7 @@ contract DeployTPCounterV2 is DeployTPScript {
         proxyAddress = vm.envAddress("PROXY");
     }
 
+    //slither-disable-next-line reentrancy-no-eth
     function _run() internal override upgrade {
         TPCounterV2 c = new TPCounterV2();
         implementation = address(c);

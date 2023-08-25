@@ -8,6 +8,7 @@
     "modifier-name-mixedcase": "warn",
     "ordering": "warn",
     "compiler-version": ["error", "^0.8.18"],
-    "func-visibility": ["warn", { "ignoreConstructors": true }]
+    "func-visibility": ["warn", { "ignoreConstructors": true }],
+    "immutable-vars-naming": "off"
   }
 }

@@ -11,18 +11,19 @@ contract TPCounterTest is Test {
     address public c1;
     address public c2;
     address public proxy;
-    address public immutable DEPLOYER;
+    address public immutable deployer;
 
     constructor() {
-        DEPLOYER = vm.envAddress("DEPLOYER");
+        deployer = vm.envAddress("DEPLOYER");
     }
 
+    //slither-disable-next-line reentrancy-benign
     function setUp() public {
         TPCounterV1 c = new TPCounterV1();
         c1 = address(c);
         bytes memory data = abi.encodeCall(c.initialize, ());
-        vm.prank(DEPLOYER);
-        proxy = address(new TransparentUpgradeableProxy(c1, DEPLOYER, data));
+        vm.prank(deployer);
+        proxy = address(new TransparentUpgradeableProxy(c1, deployer, data));
     }
 
     function testIncrNumber() public {
@@ -34,7 +35,7 @@ contract TPCounterTest is Test {
         TPCounterV2 c = new TPCounterV2();
         c2 = address(c);
         bytes memory data = abi.encodeCall(c.upgradeVersion, ());
-        vm.prank(DEPLOYER);
+        vm.prank(deployer);
         ITransparentUpgradeableProxy(proxy).upgradeToAndCall(c2, data);
         vm.startPrank(address(0));
         assertEq(TPCounterV2(proxy).version(), "v2");

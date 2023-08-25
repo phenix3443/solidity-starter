@@ -7,7 +7,7 @@ import "forge-std/Script.sol"; // solhint-disable-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
 abstract contract DeployTPScript is Script {
-    uint256 public immutable PRIVATE_KEY;
+    uint256 public immutable privateKey;
     address public implementation;
     bytes public data;
     address public proxyAddress;
@@ -15,10 +15,10 @@ abstract contract DeployTPScript is Script {
     error InvalidAddress(string reason);
 
     modifier deploy(address deployer) {
+        _;
         if (deployer == address(0)) {
             revert InvalidAddress("deployer address can not be zero");
         }
-        _;
         if (implementation == address(0)) {
             revert InvalidAddress("implementation address can not be zero");
         }
@@ -28,10 +28,10 @@ abstract contract DeployTPScript is Script {
     }
 
     modifier upgrade() {
+        _;
         if (proxyAddress == address(0)) {
             revert InvalidAddress("proxy address can not be zero");
         }
-        _;
         ITransparentUpgradeableProxy proxy = ITransparentUpgradeableProxy(
             proxyAddress
         );
@@ -42,11 +42,11 @@ abstract contract DeployTPScript is Script {
     }
 
     constructor(uint256 pkey) {
-        PRIVATE_KEY = pkey;
+        privateKey = pkey;
     }
 
     function run() external {
-        vm.startBroadcast(PRIVATE_KEY);
+        vm.startBroadcast(privateKey);
         _run();
         vm.stopBroadcast();
     }

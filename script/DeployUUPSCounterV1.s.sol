@@ -9,6 +9,7 @@ import {DeployUUPSScript} from "./DeployUUPSScript.s.sol";
 contract DeployUUPSCounterV1 is DeployUUPSScript {
     constructor() DeployUUPSScript(vm.envUint("PRIVATE_KEY")) {}
 
+    //slither-disable-next-line reentrancy-no-eth
     function _run() internal override deploy {
         UUPSCounterV1 c = new UUPSCounterV1();
         implementation = address(c);

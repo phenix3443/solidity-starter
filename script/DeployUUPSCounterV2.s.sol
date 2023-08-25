@@ -11,6 +11,7 @@ contract DeployUUPSCounterV2 is DeployUUPSScript {
         proxyAddress = vm.envAddress("PROXY");
     }
 
+    //slither-disable-next-line reentrancy-no-eth
     function _run() internal override upgrade {
         UUPSCounterV2 c = new UUPSCounterV2();
         implementation = address(c);

@@ -7,7 +7,7 @@ import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.s
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
 abstract contract DeployUUPSScript is Script {
-    uint256 public immutable PRIVATE_KEY;
+    uint256 public immutable privateKey;
     address public implementation;
     bytes public data;
     address public proxyAddress;
@@ -23,10 +23,10 @@ abstract contract DeployUUPSScript is Script {
     }
 
     modifier upgrade() {
+        _;
         if (proxyAddress == address(0)) {
             revert InvalidAddress("proxy address can not be zero");
         }
-        _;
         if (implementation == address(0)) {
             revert InvalidAddress("implementation address can not be zero");
         }
@@ -35,11 +35,11 @@ abstract contract DeployUUPSScript is Script {
     }
 
     constructor(uint256 pkey) {
-        PRIVATE_KEY = pkey;
+        privateKey = pkey;
     }
 
     function run() external {
-        vm.startBroadcast(PRIVATE_KEY);
+        vm.startBroadcast(privateKey);
         _run();
         vm.stopBroadcast();
     }
