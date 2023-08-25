@@ -9,7 +9,7 @@
     "test": "forge test",
     "lint:sol": "solhint src/**/*.sol script/**/*.sol test/**/*.sol",
     "slither": "slither .",
-    "mythril": "myth analyze src/**/*.sol script/**/*.sol",
+    "mythril": "docker run -v $(pwd):/code --workdir /code mythril/myth analyze src/*.sol --solc-json mythril.config.json",
     "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol",
     "init": "sh init.sh"
   },
