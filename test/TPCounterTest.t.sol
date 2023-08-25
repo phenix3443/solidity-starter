@@ -1,20 +1,25 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol"; // solhint-disable-line
-import {CounterV1} from "../../src/transparent/CounterV1.sol";
-import {CounterV2} from "../../src/transparent/CounterV2.sol";
+import {TPCounterV1} from "../src/TPCounterV1.sol";
+import {TPCounterV2} from "../src/TPCounterV2.sol";
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
-contract CounterTest is Test {
+contract TPCounterTest is Test {
     address public c1;
     address public c2;
     address public proxy;
-    address private deployer = vm.envAddress("DEPLOYER");
+    address public immutable deployer;
 
+    constructor() {
+        deployer = vm.envAddress("DEPLOYER");
+    }
+
+    //slither-disable-next-line reentrancy-benign
     function setUp() public {
-        CounterV1 c = new CounterV1();
+        TPCounterV1 c = new TPCounterV1();
         c1 = address(c);
         bytes memory data = abi.encodeCall(c.initialize, ());
         vm.prank(deployer);
@@ -22,20 +27,20 @@ contract CounterTest is Test {
     }
 
     function testIncrNumber() public {
-        CounterV1(proxy).incr();
-        assertEq(CounterV1(proxy).number(), 1);
+        TPCounterV1(proxy).incr();
+        assertEq(TPCounterV1(proxy).number(), 1);
     }
 
     function testSetNumber(uint256 x) public {
-        CounterV2 c = new CounterV2();
+        TPCounterV2 c = new TPCounterV2();
         c2 = address(c);
         bytes memory data = abi.encodeCall(c.upgradeVersion, ());
         vm.prank(deployer);
         ITransparentUpgradeableProxy(proxy).upgradeToAndCall(c2, data);
         vm.startPrank(address(0));
-        assertEq(CounterV2(proxy).version(), "v2");
-        CounterV2(proxy).set(x);
-        assertEq(CounterV2(proxy).number(), x);
+        assertEq(TPCounterV2(proxy).version(), "v2");
+        TPCounterV2(proxy).set(x);
+        assertEq(TPCounterV2(proxy).number(), x);
         vm.stopPrank();
     }
 }

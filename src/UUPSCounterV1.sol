@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.18;
 
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
-contract CounterV1 is OwnableUpgradeable, UUPSUpgradeable {
+contract UUPSCounterV1 is OwnableUpgradeable, UUPSUpgradeable {
     string public version;
     uint256 public number;
 

@@ -1,7 +1,10 @@
 {
-  "cSpell.words": ["commitlint", "mixedcase", "solhint"],
-  "solidity.compileUsingRemoteVersion": "v0.8.21+commit.d9974bed",
+  "cSpell.words": ["commitlint", "mixedcase", "remappings", "solhint"],
+
   "[solidity]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "solidity.compileUsingRemoteVersion": "v0.8.18+commit.87f61d96",
+  "slither.solcPath": "",
+  "slither.hiddenDetectors": []
 }

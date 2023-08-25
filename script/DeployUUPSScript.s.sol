@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.18;
 
 import "forge-std/Script.sol"; // solhint-disable
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
-abstract contract DeployScript is Script {
-    uint256 public privateKey;
+abstract contract DeployUUPSScript is Script {
+    uint256 public immutable privateKey;
     address public implementation;
     bytes public data;
     address public proxyAddress;
@@ -23,15 +23,19 @@ abstract contract DeployScript is Script {
     }
 
     modifier upgrade() {
+        _;
         if (proxyAddress == address(0)) {
             revert InvalidAddress("proxy address can not be zero");
         }
-        _;
         if (implementation == address(0)) {
             revert InvalidAddress("implementation address can not be zero");
         }
         UUPSUpgradeable proxy = UUPSUpgradeable(proxyAddress);
         proxy.upgradeToAndCall(address(implementation), data);
+    }
+
+    constructor(uint256 pkey) {
+        privateKey = pkey;
     }
 
     function run() external {

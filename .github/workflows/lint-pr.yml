@@ -18,4 +18,9 @@ jobs:
         with:
           scopes: |
             repo
+            ci
+            lint
+            doc
+            test
+            script
           requireScope: true
