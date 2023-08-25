@@ -6,7 +6,7 @@ import "forge-std/Script.sol"; // solhint-disable
 import {CounterV1} from "../../src/transparent/CounterV1.sol";
 import {DeployScript} from "./DeployScript.s.sol";
 
-contract DeplpyCounterV1 is DeployScript {
+contract DeployCounterV1 is DeployScript {
     address private _deployer = vm.envAddress("DEPLOYER");
 
     constructor() {

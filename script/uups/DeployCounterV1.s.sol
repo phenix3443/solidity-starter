@@ -6,7 +6,7 @@ import "forge-std/Script.sol"; // solhint-disable
 import {CounterV1} from "../../src/uups/CounterV1.sol";
 import {DeployScript} from "./DeployScript.s.sol";
 
-contract DeplpyCounterV1 is DeployScript {
+contract DeployCounterV1 is DeployScript {
     constructor() {
         privateKey = vm.envUint("PRIVATE_KEY");
     }
