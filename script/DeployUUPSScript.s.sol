@@ -14,7 +14,7 @@ abstract contract DeployUUPSScript is Script {
 
     error InvalidAddress(string reason);
 
-    modifier deploy() {
+    modifier create() {
         _;
         if (implementation == address(0)) {
             revert InvalidAddress("implementation address can not be zero");

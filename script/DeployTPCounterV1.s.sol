@@ -14,7 +14,7 @@ contract DeployTPCounterV1 is DeployTPScript {
     }
 
     //slither-disable-next-line reentrancy-no-eth
-    function _run() internal override deploy(_deployer) {
+    function _run() internal override create(_deployer) {
         TPCounterV1 c = new TPCounterV1();
         implementation = address(c);
         data = bytes.concat(c.initialize.selector);

@@ -10,7 +10,7 @@ contract DeployUUPSCounterV1 is DeployUUPSScript {
     constructor() DeployUUPSScript(vm.envUint("PRIVATE_KEY")) {}
 
     //slither-disable-next-line reentrancy-no-eth
-    function _run() internal override deploy {
+    function _run() internal override create {
         UUPSCounterV1 c = new UUPSCounterV1();
         implementation = address(c);
         data = bytes.concat(c.initialize.selector);
