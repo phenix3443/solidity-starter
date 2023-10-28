@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.18;
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Bank {
     mapping(address => uint) public balances;
@@ -12,7 +12,7 @@ contract Bank {
 
     function withdraw() public {
         uint256 balance = balances[msg.sender];
-        require(balance > 0);
+        require(balance > 0, "insufficient balance");
         (bool sent, ) = msg.sender.call{value: balance}("");
         require(sent, "send ETH failed");
         balances[msg.sender] = 0;
@@ -37,12 +37,9 @@ contract SafeBankWithCheck {
     }
 }
 
+// 攻击合约
 contract BankAttack {
-    Bank bank;
-
-    function setBankContract(address bankContract) public {
-        bank = Bank(bankContract);
-    }
+    Bank private bank;
 
     fallback() external payable {
         if (address(bank).balance >= 1 ether) {
@@ -51,12 +48,17 @@ contract BankAttack {
     }
 
     function attack() external payable {
-        require(msg.value == 1 ether);
+        require(msg.value == 1 ether, "invalid amount");
         bank.deposit{value: 1 ether}();
         bank.withdraw();
     }
+
+    function setBankContract(address bankContract) public {
+        bank = Bank(bankContract);
+    }
 }
 
+// 使用 openzeppelin 的 ReentrancyGuard
 contract SafeBankWithReentrancyGuard is ReentrancyGuard {
     mapping(address => uint) public balances;
 
@@ -66,7 +68,7 @@ contract SafeBankWithReentrancyGuard is ReentrancyGuard {
 
     function withdraw() public nonReentrant {
         uint256 balance = balances[msg.sender];
-        require(balance > 0);
+        require(balance > 0, "insufficient balance");
         balances[msg.sender] = 0;
         payable(msg.sender).transfer(balance);
     }
