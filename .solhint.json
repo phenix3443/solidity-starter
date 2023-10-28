@@ -9,6 +9,7 @@
     "ordering": "warn",
     "compiler-version": ["error", "^0.8.18"],
     "func-visibility": ["warn", { "ignoreConstructors": true }],
-    "immutable-vars-naming": "off"
+    "immutable-vars-naming": "off",
+    "one-contract-per-file": "off"
   }
 }

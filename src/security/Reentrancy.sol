@@ -3,8 +3,12 @@ pragma solidity ^0.8.18;
 
 import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
+error InsufficientBalance();
+error InvalidAmount();
+error TransferFailed();
+
 contract Bank {
-    mapping(address => uint) public balances;
+    mapping(address => uint256) public balances;
 
     function deposit() public payable {
         balances[msg.sender] += msg.value;
@@ -12,15 +16,19 @@ contract Bank {
 
     function withdraw() public {
         uint256 balance = balances[msg.sender];
-        require(balance > 0, "insufficient balance");
+        if (balance <= 0) {
+            revert InsufficientBalance();
+        }
         (bool sent, ) = msg.sender.call{value: balance}("");
-        require(sent, "send ETH failed");
+        if (sent != true) {
+            revert TransferFailed();
+        }
         balances[msg.sender] = 0;
     }
 }
 
 contract SafeBankWithCheck {
-    mapping(address => uint) public balances;
+    mapping(address => uint256) public balances;
 
     function deposit() public payable {
         balances[msg.sender] += msg.value;
@@ -28,12 +36,16 @@ contract SafeBankWithCheck {
 
     function withdraw() public {
         // checks first
-        require(balances[msg.sender] > 0, "insufficient balance");
+        if (balances[msg.sender] <= 0) {
+            revert InsufficientBalance();
+        }
         // effects second
         balances[msg.sender] = 0;
         // interactions last
         (bool success, ) = msg.sender.call{value: balances[msg.sender]}("");
-        require(success, "transfer failed");
+        if (success != true) {
+            revert TransferFailed();
+        }
     }
 }
 
@@ -48,7 +60,9 @@ contract BankAttack {
     }
 
     function attack() external payable {
-        require(msg.value == 1 ether, "invalid amount");
+        if (msg.value != 1 ether) {
+            revert InvalidAmount();
+        }
         bank.deposit{value: 1 ether}();
         bank.withdraw();
     }
@@ -60,7 +74,7 @@ contract BankAttack {
 
 // 使用 openzeppelin 的 ReentrancyGuard
 contract SafeBankWithReentrancyGuard is ReentrancyGuard {
-    mapping(address => uint) public balances;
+    mapping(address => uint256) public balances;
 
     function deposit() public payable {
         balances[msg.sender] += msg.value;
@@ -68,7 +82,9 @@ contract SafeBankWithReentrancyGuard is ReentrancyGuard {
 
     function withdraw() public nonReentrant {
         uint256 balance = balances[msg.sender];
-        require(balance > 0, "insufficient balance");
+        if (balance <= 0) {
+            revert InsufficientBalance();
+        }
         balances[msg.sender] = 0;
         payable(msg.sender).transfer(balance);
     }
