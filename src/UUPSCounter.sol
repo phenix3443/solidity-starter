@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 
-contract UUPSCounterV1 is OwnableUpgradeable, UUPSUpgradeable {
+contract CounterV1 is OwnableUpgradeable, UUPSUpgradeable {
     string public version;
     uint256 public number;
 
@@ -20,4 +20,14 @@ contract UUPSCounterV1 is OwnableUpgradeable, UUPSUpgradeable {
     function _authorizeUpgrade(
         address newImplementation
     ) internal virtual override onlyOwner {} // solhint-disable-line
+}
+
+contract CounterV2 is CounterV1 {
+    function upgradeVersion() public {
+        version = "v2";
+    }
+
+    function set(uint256 num) public {
+        number = num;
+    }
 }

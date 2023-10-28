@@ -2,8 +2,7 @@
 pragma solidity ^0.8.18;
 
 import "forge-std/Test.sol"; // solhint-disable-line
-import {TPCounterV1} from "../src/TPCounterV1.sol";
-import {TPCounterV2} from "../src/TPCounterV2.sol";
+import {CounterV1, CounterV2} from "../src/TPCounter.sol";
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
@@ -19,7 +18,7 @@ contract TPCounterTest is Test {
 
     //slither-disable-next-line reentrancy-benign
     function setUp() public {
-        TPCounterV1 c = new TPCounterV1();
+        CounterV1 c = new CounterV1();
         c1 = address(c);
         bytes memory data = abi.encodeCall(c.initialize, ());
         vm.prank(deployer);
@@ -27,20 +26,20 @@ contract TPCounterTest is Test {
     }
 
     function testIncrNumber() public {
-        TPCounterV1(proxy).incr();
-        assertEq(TPCounterV1(proxy).number(), 1);
+        CounterV1(proxy).incr();
+        assertEq(CounterV1(proxy).number(), 1);
     }
 
     function testSetNumber(uint256 x) public {
-        TPCounterV2 c = new TPCounterV2();
+        CounterV2 c = new CounterV2();
         c2 = address(c);
         bytes memory data = abi.encodeCall(c.upgradeVersion, ());
         vm.prank(deployer);
         ITransparentUpgradeableProxy(proxy).upgradeToAndCall(c2, data);
         vm.startPrank(address(0));
-        assertEq(TPCounterV2(proxy).version(), "v2");
-        TPCounterV2(proxy).set(x);
-        assertEq(TPCounterV2(proxy).number(), x);
+        assertEq(CounterV2(proxy).version(), "v2");
+        CounterV2(proxy).set(x);
+        assertEq(CounterV2(proxy).number(), x);
         vm.stopPrank();
     }
 }

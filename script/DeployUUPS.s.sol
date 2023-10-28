@@ -5,8 +5,9 @@ pragma solidity ^0.8.18;
 import "forge-std/Script.sol"; // solhint-disable
 import {ERC1967Proxy} from "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
+import {CounterV1, CounterV2} from "../src/UUPSCounter.sol";
 
-abstract contract DeployUUPSScript is Script {
+abstract contract DeployScript is Script {
     uint256 public immutable privateKey;
     address public implementation;
     bytes public data;
@@ -45,4 +46,28 @@ abstract contract DeployUUPSScript is Script {
     }
 
     function _run() internal virtual;
+}
+
+contract DeployCounterV1 is DeployScript {
+    constructor() DeployScript(vm.envUint("PRIVATE_KEY")) {}
+
+    //slither-disable-next-line reentrancy-no-eth
+    function _run() internal override create {
+        CounterV1 c = new CounterV1();
+        implementation = address(c);
+        data = bytes.concat(c.initialize.selector);
+    }
+}
+
+contract DeployCounterV2 is DeployScript {
+    constructor() DeployScript(vm.envUint("PRIVATE_KEY")) {
+        proxyAddress = vm.envAddress("PROXY");
+    }
+
+    //slither-disable-next-line reentrancy-no-eth
+    function _run() internal override upgrade {
+        CounterV2 c = new CounterV2();
+        implementation = address(c);
+        data = bytes.concat(c.upgradeVersion.selector);
+    }
 }

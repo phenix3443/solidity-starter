@@ -3,10 +3,13 @@
 pragma solidity ^0.8.18;
 
 import "forge-std/Script.sol"; // solhint-disable-line
+
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
-abstract contract DeployTPScript is Script {
+import {CounterV1, CounterV2} from "../src/TPCounter.sol";
+
+abstract contract DeployScript is Script {
     uint256 public immutable privateKey;
     address public implementation;
     bytes public data;
@@ -52,4 +55,32 @@ abstract contract DeployTPScript is Script {
     }
 
     function _run() internal virtual;
+}
+
+contract DeployCounterV1 is DeployScript {
+    address private immutable _deployer;
+
+    constructor() DeployScript(vm.envUint("PRIVATE_KEY")) {
+        _deployer = vm.envAddress("DEPLOYER");
+    }
+
+    //slither-disable-next-line reentrancy-no-eth
+    function _run() internal override create(_deployer) {
+        CounterV1 c = new CounterV1();
+        implementation = address(c);
+        data = bytes.concat(c.initialize.selector);
+    }
+}
+
+contract DeployCounterV2 is DeployScript {
+    constructor() DeployScript(vm.envUint("PRIVATE_KEY")) {
+        proxyAddress = vm.envAddress("PROXY");
+    }
+
+    //slither-disable-next-line reentrancy-no-eth
+    function _run() internal override upgrade {
+        CounterV2 c = new CounterV2();
+        implementation = address(c);
+        data = bytes.concat(c.upgradeVersion.selector);
+    }
 }
