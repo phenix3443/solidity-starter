@@ -10,7 +10,9 @@ contract Hello {
         name = _name;
     }
 
-    function hello() public view returns (string memory) {
-        return name;
+    function hello(
+        string calldata message
+    ) public view returns (string memory) {
+        return string.concat(message, "", name);
     }
 }
