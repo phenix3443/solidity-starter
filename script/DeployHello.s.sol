@@ -8,7 +8,7 @@ import {Hello} from "../src/Hello.sol";
 contract DeployHello is Script {
     function run() external {
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
-        new Hello("John", 25);
+        new Hello();
         vm.stopBroadcast();
     }
 }

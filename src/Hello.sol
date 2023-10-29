@@ -5,27 +5,9 @@ import "forge-std/Script.sol"; // solhint-disable
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Hello {
-    struct Person {
-        uint8 age;
-        string name;
-    }
-    Person public p;
+    mapping(string name => uint256 balance) public balances;
 
-    constructor(string memory name, uint8 age) {
-        p.name = name;
-        p.age = age;
-    }
-
-    function hello(
-        string calldata message
-    ) public view returns (string memory) {
-        return
-            string.concat(
-                message,
-                " ",
-                p.name,
-                ", your are",
-                Strings.toString(p.age)
-            );
+    function set(string calldata name, uint256 _balance) public {
+        balances[name] = _balance;
     }
 }
