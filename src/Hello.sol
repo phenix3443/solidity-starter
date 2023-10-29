@@ -5,9 +5,14 @@ import "forge-std/Script.sol"; // solhint-disable
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Hello {
-    mapping(string name => uint256 balance) public balances;
+    string[] public peoples;
 
-    function set(string calldata name, uint256 _balance) public {
-        balances[name] = _balance;
+    constructor(string memory name) {
+        peoples.push(name);
+    }
+
+    function get() public view returns (string[] memory) {
+        string[] memory newPeoples = peoples;
+        return newPeoples;
     }
 }
