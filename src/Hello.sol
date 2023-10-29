@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol"; // solhint-disable
+import "forge-std/console.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Hello {

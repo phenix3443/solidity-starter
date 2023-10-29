@@ -4,4 +4,6 @@
 # source .env && forge script --target-contract DeployCounterV2 --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployTP.s.sol
 # source .env && forge script --target-contract DeployCounterV1 --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployUUPS.s.sol
 # source .env && forge script --target-contract DeployCounterV2 --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployUUPS.s.sol
-source .env && forge script --target-contract DeployHello --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployHello.s.sol
+# source .env && forge script --target-contract DeployHello --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployHello.s.sol
+# source .env && forge script --target-contract Step1 --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployCreate.s.sol
+source .env && forge script --target-contract Step2 --rpc-url ${RPC_URL} --broadcast -vvvv script/DeployCreate.s.sol

@@ -10,6 +10,7 @@
     "compiler-version": ["error", "^0.8.20"],
     "func-visibility": ["warn", { "ignoreConstructors": true }],
     "immutable-vars-naming": "off",
-    "one-contract-per-file": "off"
+    "one-contract-per-file": "off",
+    "no-console": "off"
   }
 }
