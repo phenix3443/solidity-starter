@@ -5,19 +5,20 @@ import "forge-std/Script.sol"; // solhint-disable
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract Hello {
-    enum Status {
-        Pending,
-        Running,
-        Success
+    struct Person {
+        string name;
+        uint256 age;
     }
 
-    Status public status;
+    Person[] public peoples;
 
-    constructor() {
-        status = Status.Running;
+    constructor(string memory name, uint256 age) {
+        Person memory p = Person(name, age);
+        peoples.push(p);
     }
 
-    function get() public view returns (Status) {
-        return status;
+    function get() public view returns (Person[] memory) {
+        Person[] memory newPeoples = peoples;
+        return newPeoples;
     }
 }
