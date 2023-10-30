@@ -47,7 +47,10 @@ contract Target {
 }
 
 contract Attack {
+    address public owner;
+
     function executeProposal() external payable {
+        owner = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
         console.log("Executed in Attack");
     }
 

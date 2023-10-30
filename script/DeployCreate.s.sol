@@ -10,7 +10,7 @@ contract Step1 is Script {
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         // dao
         DAO dao = new DAO();
-        console.log("dao: %s", address(dao));
+        console.log("dao: %s, owner: %s", address(dao), dao.owner());
         // attacker
         DeployerFactory factory = new DeployerFactory();
         console.log("factory: %s", address(factory));
@@ -38,6 +38,7 @@ contract Step2 is Script {
         console.log("attack: %s", address(attack));
         DAO dao = DAO(address(0x5FbDB2315678afecb367f032d93F642f64180aa3));
         dao.execute(0);
+        console.log("owner: %s", dao.owner());
         vm.stopBroadcast();
     }
 }
