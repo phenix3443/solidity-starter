@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol"; // solhint-disable-line
 import "forge-std/console.sol"; // solhint-disable-line
-import {DAO, Target, Attack, Deployer, DeployerFactory} from "../src/Create.sol";
+import {DAO, Target, Attack, Deployer, DeployerFactory} from "../src/security/Create.sol";
 
 contract Step1 is Script {
     function run() external {
