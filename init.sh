@@ -1,8 +1,5 @@
 #!/bin/bash
-# husky
-husky install
-# pnpm
-brew install pnpm
+
 # foundry
 curl -L https://foundry.paradigm.xyz | bash && foundryup
 # slither

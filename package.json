@@ -4,6 +4,7 @@
   "description": "contract template repository developed by solidity",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky install",
     "init": "sh init.sh",
     "build": "forge build",
     "test": "forge test",
