@@ -7,7 +7,7 @@ import "forge-std/Script.sol"; // solhint-disable-line
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 
-import {CounterV1, CounterV2} from "../src/TPCounter.sol";
+import {TPCounterV1, TPCounterV2} from "../src/TPCounter.sol";
 
 abstract contract DeployScript is Script {
     uint256 public immutable privateKey;
@@ -66,7 +66,7 @@ contract DeployCounterV1 is DeployScript {
 
     //slither-disable-next-line reentrancy-no-eth
     function _run() internal override create(_deployer) {
-        CounterV1 c = new CounterV1();
+        TPCounterV1 c = new TPCounterV1();
         implementation = address(c);
         data = bytes.concat(c.initialize.selector);
     }
@@ -79,7 +79,7 @@ contract DeployCounterV2 is DeployScript {
 
     //slither-disable-next-line reentrancy-no-eth
     function _run() internal override upgrade {
-        CounterV2 c = new CounterV2();
+        TPCounterV2 c = new TPCounterV2();
         implementation = address(c);
         data = bytes.concat(c.upgradeVersion.selector);
     }
