@@ -15,5 +15,4 @@ you should install following tools:
 
 ```shell
 pnpm init
-pnpm install:slither
 ```
