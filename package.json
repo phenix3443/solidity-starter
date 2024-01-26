@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
+    "init": "sh init.sh",
     "build": "forge build",
     "test": "forge test",
     "lint:sol": "solhint src/**/*.sol script/**/*.sol test/**/*.sol",
     "slither": "slither .",
     "mythril": "docker run -v $(pwd):/code --workdir /code mythril/myth analyze src/*.sol --solc-json mythril.config.json",
-    "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol",
-    "init": "sh init.sh"
+    "format:sol": "prettier --write --plugin=prettier-plugin-solidity src/**/*.sol script/**/*.sol test/**/*.sol"
   },
   "repository": {
     "type": "git",
