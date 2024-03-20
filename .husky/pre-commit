@@ -1,16 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-run_when_file_changed() {
-    if (git diff --cached --name-only | grep --quiet "$1"); then
-        $2
-    fi
-}
-
-check_solidity() {
-    pnpm test &&
-        pnpm lint:sol &&
-        pnpm format:sol
-}
-
-run_when_file_changed ".sol" check_solidity
+npx lint-staged
