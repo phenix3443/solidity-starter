@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.20;
 
-import "forge-std/Script.sol"; // solhint-disable-line
+import "@forge-std/Script.sol"; // solhint-disable-line
 
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";

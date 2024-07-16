@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.20;
 
-import "forge-std/Test.sol"; // solhint-disable-line
+import "@forge-std/Test.sol"; // solhint-disable-line
 import {TPCounterV1, TPCounterV2} from "../src/TPCounter.sol";
 // solhint-disable-next-line
 import {ITransparentUpgradeableProxy, TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";

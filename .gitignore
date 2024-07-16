@@ -10,3 +10,4 @@ broadcast
 # mythril
 bin
 .DS_Store
+dependencies

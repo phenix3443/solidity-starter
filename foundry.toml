@@ -14,7 +14,8 @@ multiline_func_header = 'all'
 number_underscore = 'thousands'
 wrap_comments = true
 
-remappings = [
-    '@openzeppelin/contracts=lib/openzeppelin-contracts/contracts',
-    '@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/',
-]
+
+[dependencies]
+"@openzeppelin-contracts" = "5.0.2"
+"@openzeppelin-contracts-upgradeable" = "5.0.2"
+forge-std = "1.9.1"
