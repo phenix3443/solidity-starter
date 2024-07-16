@@ -1,10 +1,14 @@
 {
   "cSpell.words": ["commitlint", "mixedcase", "remappings", "solhint"],
-
   "[solidity]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "solidity.compileUsingRemoteVersion": "v0.8.26+commit.8a97fa7a",
   "solidity.packageDefaultDependenciesContractsDirectory": "src",
-  "solidity.packageDefaultDependenciesDirectory": "lib"
+  "solidity.packageDefaultDependenciesDirectory": "dependencies",
+  "solidity.remappings": [
+    "@openzeppelin/contracts=dependencies/@openzeppelin-contracts-5.0.2",
+    "@openzeppelin/contracts-upgradeable=dependencies/@openzeppelin-contracts-upgradeable-5.0.2",
+    "@forge-std=dependencies/forge-std-1.9.1/src"
+  ]
 }

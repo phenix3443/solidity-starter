@@ -3,7 +3,6 @@
 # project
 src = 'src'
 out = 'out'
-libs = ["lib"]
 
 # solc
 solc_version = '0.8.26'
