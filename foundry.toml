@@ -3,13 +3,18 @@
 # project
 src = 'src'
 out = 'out'
-libs = ["node_modules", "lib"]
+libs = ["lib"]
 
 # solc
-solc_version = '0.8.20'
-
+solc_version = '0.8.26'
+evm_version = "cancun"
 # fmt
 [fmt]
 multiline_func_header = 'all'
 number_underscore = 'thousands'
 wrap_comments = true
+
+remappings = [
+    '@openzeppelin/contracts=lib/openzeppelin-contracts/contracts',
+    '@openzeppelin/contracts-upgradeable/=lib/openzeppelin-contracts-upgradeable/contracts/',
+]

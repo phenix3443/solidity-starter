@@ -6,7 +6,6 @@ lib
 out
 cache
 broadcast
-.vscode/slither-results.json
 
 # mythril
 bin

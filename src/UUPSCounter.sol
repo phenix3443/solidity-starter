@@ -2,14 +2,14 @@
 pragma solidity ^0.8.20;
 
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import {UUPSUpgradeable} from "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
+import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 contract CounterV1 is OwnableUpgradeable, UUPSUpgradeable {
     string public version;
     uint256 public number;
 
     function initialize() public initializer {
-        OwnableUpgradeable.__Ownable_init();
+        OwnableUpgradeable.__Ownable_init(msg.sender);
         version = "v1";
     }
 
